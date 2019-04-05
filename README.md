@@ -11,6 +11,16 @@ fastq-dump --split-spot sample.sra
 gzip sample.fastq
 zcat sample.fastq.gz | seqkit rmdup -s -o clean.fastq.gz
 #[INFO] 471284 duplicated records removed
+#get 1 unique sample of million read
+zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_1.fastq.gz
+zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_2.fastq.gz
+#five times
+#shuffle
+seqkit shuffle sample.fa.gz > shuffled.fastq
+gzip shuffled.fastq
+zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_1.fastq.gz
+
+
 
  
 
