@@ -8,7 +8,9 @@ fastq-dump --split-spot sample.sra
  # convert sra to two files fastq
  fastq-dump --split-3 sample.sra
 # get unique reads
-uniq -u sample.fastq > unique.fastq
+gzip sample.fastq
+zcat sample.fastq.gz | seqkit rmdup -s -o clean.fastq.gz
+#[INFO] 471284 duplicated records removed
 
  
 
