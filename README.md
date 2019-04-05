@@ -14,13 +14,19 @@ zcat sample.fastq.gz | seqkit rmdup -s -o clean.fastq.gz
 #get 1 unique sample of million read
 zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_1.fastq.gz
 zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_2.fastq.gz
-#five times
+zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_3.fastq.gz
+zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_4.fastq.gz
+zcat clean.fastq.gz | seqkit sample -n 1000000 -o sample1_5.fastq.gz
 #shuffle
-seqkit shuffle sample.fa.gz > shuffled.fastq
+seqkit shuffle sample.fastq.gz > shuffled.fastq
 gzip shuffled.fastq
 zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_1.fastq.gz
-
-
+zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_2.fastq.gz
+zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_3.fastq.gz
+zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_4.fastq.gz
+zcat shuffled.fastq.gz | seqkit sample -n 1000000 -o sample2_5.fastq.gz
+#use FASTQC to report the difference between S1_1 and S1_2
+fastqc -t 1 -f fastq -noextract sample1_1.fastq.gz
 
  
 
