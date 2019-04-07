@@ -14,11 +14,11 @@ seqkit shuffle sample.fastq.gz > shuffled.fastq
 gzip shuffled.fastq
 seqkit split shuffled.fastq.gz -s 1000000
 # use FASTQC to report the difference between S1_1 and S1_2
-fastqc -t 1 -f fastq -noextract sample1_1.fastq.gz
+fastqc -o ~/home/ngs-01/workdir/assignment --noextract -f fastq sample1_1.fastq.gz
 # Mild Trimming for SX_1. {unshuffled}
 cutadapt -m 10 -q 20 -o sample1_1_trimmed.fastq.gz sample1_1.fastq.gz
 # Aggressive Trimming for SX_2. {shuffled}
-cutadapt -m 10 -q 20 -o sample1_2_trimmed.fastq.gz sample1_2.fastq.gz
+cutadapt -m 50 -q 100 -o sample1_2_trimmed.fastq.gz sample1_2.fastq.gz
 
  
 
