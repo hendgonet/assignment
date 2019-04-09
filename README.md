@@ -26,16 +26,29 @@ cutadapt -m 10 -q 20 -o sample1_1_trimmed.fastq.gz sample.part_001.fastq.gz
 cd ..
 cd shuffled.fastq.gz.split
 cutadapt -m 50 -q 100 -o sample1_2_trimmed.fastq.gz shuffled.part_001.fastq.gz
-# Alignment
+# ABWA Alignment
 cd ..
-conda install -c bioconda bwa 
-mkdir -p ~/workdir/assignment/bwa_align/bwaIndex
-cd ~/workdir/assignment/bwa_align/bwaIndexbwa 
+source activate ngs1
+mkdir -p ~/workdir/bwa_align/bwaIndex
+cd ~/workdir/bwa_align/bwaIndex
 ln -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
-index -a bwtsw chr22_with_ERCC92.fa
+bwa index -a bwtsw chr22_with_ERCC92.fa.bwa 
+cd ~/workdir/bwa_align
+R1="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_001.fastq.gz"
+R2="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_002.fastq.gz"
+R3="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_003.fastq.gz"
+R4="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_004.fastq.gz"
+R5="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_005.fastq.gz"
+source activate ngs1
+conda install -c bioconda hisat2 
+mkdir -p ~/workdir/hisat_align/hisatIndex
+cd ~/workdir/hisat_align/hisatIndex
+hisat2_extract_splice_sites.py ~/workdir/assignment/chr22_with_ERCC92.gtf > splicesites.tsvn -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
+hisat2_extract_exons.py ~/workdir/assignment/chr22_with_ERCC92.gtf > exons.tsv
+hisat2-build -p 1 --ss splicesites.tsv --exon exons.tsv chr22_with_ERCC92.fa chr22_with_ERCC92
+cd ~/workdir/hisat_align
+R1="$HOME/workdir/assignment/sample.fastq.gz.split/HBR_Rep1_ERCC-Mix2_Build37-ErccTranscripts-chr22.read1.fastq.gz"
 
 
 
-
- 
 
