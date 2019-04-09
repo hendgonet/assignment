@@ -28,6 +28,14 @@ cd shuffled.fastq.gz.split
 cutadapt -m 50 -q 100 -o sample1_2_trimmed.fastq.gz shuffled.part_001.fastq.gz
 # Alignment
 cd ..
+conda install -c bioconda bwa 
+mkdir -p ~/workdir/assignment/bwa_align/bwaIndex
+cd ~/workdir/assignment/bwa_align/bwaIndexbwa 
+ln -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
+index -a bwtsw chr22_with_ERCC92.fa
+
+
+
 
  
 
