@@ -26,7 +26,7 @@ cutadapt -m 10 -q 20 -o sample1_1_trimmed.fastq.gz sample.part_001.fastq.gz
 cd ..
 cd shuffled.fastq.gz.split
 cutadapt -m 50 -q 100 -o sample1_2_trimmed.fastq.gz shuffled.part_001.fastq.gz
-# ABWA Alignment
+# BWA Alignment
 cd ..
 source activate ngs1
 mkdir -p ~/workdir/bwa_align/bwaIndex
