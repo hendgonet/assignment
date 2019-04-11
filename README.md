@@ -39,6 +39,7 @@ R2="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_002.fastq.gz"
 R3="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_003.fastq.gz"
 R4="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_004.fastq.gz"
 R5="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_005.fastq.gz"
+# hisat2 Alignment
 source activate ngs1
 conda install -c bioconda hisat2 
 mkdir -p ~/workdir/hisat_align/hisatIndex
@@ -47,7 +48,13 @@ hisat2_extract_splice_sites.py ~/workdir/assignment/chr22_with_ERCC92.gtf > spli
 hisat2_extract_exons.py ~/workdir/assignment/chr22_with_ERCC92.gtf > exons.tsv
 hisat2-build -p 1 --ss splicesites.tsv --exon exons.tsv chr22_with_ERCC92.fa chr22_with_ERCC92
 cd ~/workdir/hisat_align
-R1="$HOME/workdir/assignment/sample.fastq.gz.split/HBR_Rep1_ERCC-Mix2_Build37-ErccTranscripts-chr22.read1.fastq.gz"
+R1="$HOME/workdir/assignment/shuffled.fastq.gz.split/HBR_Rep1_ERCC-Mix2_Build37-ErccTranscripts-chr22.read1.fastq.gz"
+# Prepare the SAM file for assembly
+source activate ngs1
+conda install samtools
+# Assembly with stringtie
+source activate ngs1
+conda install stringtie
 
 
 
