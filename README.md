@@ -32,7 +32,7 @@ source activate ngs1
 mkdir -p ~/workdir/bwa_align/bwaIndex
 cd ~/workdir/bwa_align/bwaIndex
 ln -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
-bwa index -a bwtsw chr22_with_ERCC92.fa.bwa 
+bwa index -a bwtsw chr22_with_ERCC92.fa
 cd ~/workdir/bwa_align
 R1="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_001.fastq.gz"
 R2="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_002.fastq.gz"
@@ -44,14 +44,16 @@ source activate ngs1
 conda install -c bioconda hisat2 
 mkdir -p ~/workdir/hisat_align/hisatIndex
 cd ~/workdir/hisat_align/hisatIndex
-hisat2_extract_splice_sites.py ~/workdir/assignment/chr22_with_ERCC92.gtf > splicesites.tsvn -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
-hisat2_extract_exons.py ~/workdir/assignment/chr22_with_ERCC92.gtf > exons.tsv
+ln -s ~/home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
+hisat2_extract_splice_sites.py ~home/ngs-01/workdir/sample_data/chr22_with_ERCC92.gtf > splicesites.tsv
+hisat2_extract_exons.py ~home/ngs-01/workdir/sample_data/chr22_with_ERCC92.gtf > exons.tsv
 hisat2-build -p 1 --ss splicesites.tsv --exon exons.tsv chr22_with_ERCC92.fa chr22_with_ERCC92
-cd ~/workdir/hisat_align
-R1="$HOME/workdir/assignment/shuffled.fastq.gz.split/HBR_Rep1_ERCC-Mix2_Build37-ErccTranscripts-chr22.read1.fastq.gz"
-# Prepare the SAM file for assembly
 source activate ngs1
 conda install samtools
+
+
+
+hisat2 -p 1 -x hisatIndex/chr22_with_ERCC92 --dta --rna-strandness RF -1 $R1 -2 $R2 -S UHR_Rep1.sam
 # Assembly with stringtie
 source activate ngs1
 conda install stringtie
