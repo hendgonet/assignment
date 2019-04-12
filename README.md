@@ -41,7 +41,6 @@ mkdir -p ~/workdir/assignment/bwa_align/bwaIndex
 cd ~/workdir/assignment/bwa_align/bwaIndex
 ln -s /home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa.
 bwa index -a bwtsw /home/ngs-01/workdir/assignment/chr22_with_ERCC92.fa
-cd ~/workdir/assignment/bwa_align
 R1="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_001.fastq.gz"
 R2="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_002.fastq.gz"
 R3="$HOME/workdir/assignment/sample.fastq.gz.split/sample.part_003.fastq.gz"
